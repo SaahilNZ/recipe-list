@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace RecipeList.Web.Pages
 {
-    public class IndexModel : PageModel
+    public class RecipeDetailsModel : PageModel
     {
         public void OnGet()
         {
+            
         }
     }
 }
