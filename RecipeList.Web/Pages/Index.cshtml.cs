@@ -9,9 +9,11 @@ namespace RecipeList.Web.Pages
 {
     public class IndexModel : PageModel
     {
+        public string Message { get; set; }
+
         public void OnGet()
         {
-
+            Message = "Your application description page.";
         }
     }
 }
