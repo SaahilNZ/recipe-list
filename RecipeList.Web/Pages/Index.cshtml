@@ -1,9 +1,53 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Recipes";
 }
 <h2>@ViewData["Title"]</h2>
-<h3>@Model.Message</h3>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Created by</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Spinach and Feta Scrolls</td>
+            <td>John Doe</td>
+        </tr>
+        <tr>
+            <td>Barbecue Prawn and Peach Skewers</td>
+            <td>Jane Doe</td>
+        </tr>
+        <tr>
+            <td>Lamb Naan Pizzas</td>
+            <td>James Dough</td>
+        </tr>
+        <tr>
+            <td>Salmon and Cucumber Sushi Slice</td>
+            <td>Jimmy Doe</td>
+        </tr>
+        <tr>
+            <td>BBQ Eggplant, Haloumi and Pesto Burgers</td>
+            <td>Janette Doe</td>
+        </tr>
+        <tr>
+            <td>Grilled Nectarines with Passionfruit Yoghurt</td>
+            <td>Jack Doe</td>
+        </tr>
+        <tr>
+            <td>Tomato and Cajun Chicken Skewers with Green Recipe</td>
+            <td>Josh Doe</td>
+        </tr>
+        <tr>
+            <td>Pasta and Corn Frittatas</td>
+            <td>Jill Doe</td>
+        </tr>
+        <tr>
+            <td>Chicken and Noodle Lettuce Cups</td>
+            <td>Jerry Doe</td>
+        </tr>
+    </tbody>
 
-<p>Use this area to provide additional information.</p>
+</table>
