@@ -12,42 +12,13 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Spinach and Feta Scrolls</a></td>
-            <td>John Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Barbecue Prawn and Peach Skewers</a></td>
-            <td>Jane Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Lamb Naan Pizzas</a></td>
-            <td>James Dough</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Salmon and Cucumber Sushi Slice</a></td>
-            <td>Jimmy Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">BBQ Eggplant, Haloumi and Pesto Burgers</a></td>
-            <td>Janette Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Grilled Nectarines with Passionfruit Yoghurt</a></td>
-            <td>Jack Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Tomato and Cajun Chicken Skewers with Green Recipe</a></td>
-            <td>Josh Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Pasta and Corn Frittatas</a></td>
-            <td>Jill Doe</td>
-        </tr>
-        <tr>
-            <td><a asp-page="/RecipeDetails">Chicken and Noodle Lettuce Cups</a></td>
-            <td>Jerry Doe</td>
-        </tr>
+        @foreach (var recipe in Model.Recipes)
+        {
+            <tr>
+                <td><a asp-page="/RecipeDetails">@Html.Raw(recipe.Name)</a></td>
+                <td>@Html.Raw(recipe.CreatedBy.FullName)</td>
+            </tr>
+        }
     </tbody>
 
 </table>

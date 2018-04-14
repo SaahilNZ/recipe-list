@@ -10,11 +10,11 @@ namespace RecipeList.Web.Pages
 {
     public class RecipeDetailsModel : PageModel
     {
-        public Recipe Recipe { get; set; }
+        public RecipeDetails Recipe { get; set; }
 
         public void OnGet()
         {
-            Recipe = new Recipe
+            Recipe = new RecipeDetails
             {
                 Name = "Spinach and Feta Scrolls",
                 CreatedBy = new User

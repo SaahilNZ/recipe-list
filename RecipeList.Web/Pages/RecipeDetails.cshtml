@@ -4,7 +4,7 @@
     ViewData["Title"] = @Model.Recipe.Name;
 }
 <h2>@ViewData["Title"]</h2>
-<p>Created by <strong>@Model.Recipe.CreatedBy.FirstName @Model.Recipe.CreatedBy.LastName</strong></p>
+<p>Created by <strong>@Model.Recipe.CreatedBy.FullName</strong></p>
 <p>Serves: <strong>@Model.Recipe.Serves</strong></p>
 
 <h3>Ingredients</h3>
