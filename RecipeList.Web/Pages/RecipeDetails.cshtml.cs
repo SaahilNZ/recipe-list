@@ -22,7 +22,7 @@ namespace RecipeList.Web.Pages
 
         public void OnGet()
         {
-            Recipe = recipeService.GetRecipe(0);
+            Recipe = recipeService.GetRecipe(1);
         }
     }
 }
