@@ -20,9 +20,9 @@ namespace RecipeList.Web.Pages
             this.recipeService = recipeService;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
-            Recipe = recipeService.GetRecipe(1);
+            Recipe = recipeService.GetRecipe(id);
         }
     }
 }

@@ -15,7 +15,7 @@
         @foreach (var recipe in Model.Recipes)
         {
             <tr>
-                <td><a asp-page="/RecipeDetails">@Html.Raw(recipe.Name)</a></td>
+                <td><a asp-page="/RecipeDetails" asp-route-id="@recipe.Id">@Html.Raw(recipe.Name)</a></td>
                 <td>@Html.Raw(recipe.CreatedBy.FullName)</td>
             </tr>
         }
