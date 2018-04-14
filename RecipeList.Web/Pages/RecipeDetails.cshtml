@@ -1,34 +1,25 @@
 ﻿@page
 @model RecipeDetailsModel
 @{
-    ViewData["Title"] = "Spinach and Feta Scrolls";
+    ViewData["Title"] = @Model.PageRecipe.Name;
 }
 <h2>@ViewData["Title"]</h2>
-<p>Created by <strong>John Doe</strong></p>
-<p>Serves: <strong>6</strong></p>
+<p>Created by <strong>@Model.PageRecipe.CreatedBy.FirstName @Model.PageRecipe.CreatedBy.LastName</strong></p>
+<p>Serves: <strong>@Model.PageRecipe.Serves</strong></p>
 
 <h3>Ingredients</h3>
 <ul>
-    <li>1 &frac12; sheets frozen puff pastry, thawed</li>
-    <li>Spray cooking oil</li>
-    <li>250g baby spinach</li>
-    <li>100g crumbled feta cheese</li>
+    @foreach (var ingredient in Model.PageRecipe.Ingredients)
+    {
+        <li>@Html.Raw(@ingredient.Name)</li>
+    }
 </ul>
 
 <h3>Method</h3>
 <ol>
-    <li>Preheat oven to 200 &deg;C (180 &deg;C fan-forced).</li>
-    <li>Line a large oven tray with baking paper.</li>
-    <li>Join pastry sheets, overlapping them by 1cm and pressing together to join.</li>
-    <li>Place pastry over the baking paper.</li>
-    <li>Spray a medium sized frying pan with oil.</li>
-    <li>Place spinach in the frying pan and saut&eacute; over a medium heat for 1-2 minutes, or until just wilted.</li>
-    <li>Transfer to a colander and squeeze out excess moisture.</li>
-    <li>Spread spinach over pastry, leaving a 3cm border around the edge.</li>
-    <li>Sprinkle feta over top.</li>
-    <li>Brush pastry edge with a small amount of water and roll up loosely.</li>
-    <li>Cut into six equal rounds.</li>
-    <li>Arrange the rounds with the cut-side up on the baking tray.</li>
-    <li>Bake for 15-20 minutes or until the pastry is crisp and golden.</li>
+    @foreach (var step in Model.PageRecipe.Method)
+    {
+        <li>@Html.Raw(@step)</li>
+    }
 </ol>
 
