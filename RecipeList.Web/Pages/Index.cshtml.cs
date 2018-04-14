@@ -11,12 +11,18 @@ namespace RecipeList.Web.Pages
 {
     public class IndexModel : PageModel
     {
+        private readonly IRecipeService recipeService;
+
         public List<Recipe> Recipes { get; set; }
+
+        public IndexModel(IRecipeService recipeService)
+        {
+            this.recipeService = recipeService;
+        }
 
         public void OnGet()
         {
-            var service = new RecipeService();
-            Recipes = service.GetRecipes();
+            Recipes = recipeService.GetRecipes();
         }
     }
 }

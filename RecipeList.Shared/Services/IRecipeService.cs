@@ -4,7 +4,7 @@ using RecipeList.Model;
 
 namespace RecipeList.Services
 {
-    interface IRecipeService
+    public interface IRecipeService
     {
         List<Recipe> GetRecipes();
         RecipeDetails GetRecipe(int id);
