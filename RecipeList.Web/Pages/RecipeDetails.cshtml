@@ -1,15 +1,15 @@
 ﻿@page
 @model RecipeDetailsModel
 @{
-    ViewData["Title"] = @Model.PageRecipe.Name;
+    ViewData["Title"] = @Model.Recipe.Name;
 }
 <h2>@ViewData["Title"]</h2>
-<p>Created by <strong>@Model.PageRecipe.CreatedBy.FirstName @Model.PageRecipe.CreatedBy.LastName</strong></p>
-<p>Serves: <strong>@Model.PageRecipe.Serves</strong></p>
+<p>Created by <strong>@Model.Recipe.CreatedBy.FirstName @Model.Recipe.CreatedBy.LastName</strong></p>
+<p>Serves: <strong>@Model.Recipe.Serves</strong></p>
 
 <h3>Ingredients</h3>
 <ul>
-    @foreach (var ingredient in Model.PageRecipe.Ingredients)
+    @foreach (var ingredient in Model.Recipe.Ingredients)
     {
         <li>@Html.Raw(@ingredient.Name)</li>
     }
@@ -17,7 +17,7 @@
 
 <h3>Method</h3>
 <ol>
-    @foreach (var step in Model.PageRecipe.Method)
+    @foreach (var step in Model.Recipe.Method)
     {
         <li>@Html.Raw(@step)</li>
     }

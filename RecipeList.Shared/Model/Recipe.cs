@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RecipeList.Web
+namespace RecipeList.Model
 {
     public class Recipe
     {
