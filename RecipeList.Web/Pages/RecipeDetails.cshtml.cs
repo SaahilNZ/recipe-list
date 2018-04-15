@@ -20,7 +20,7 @@ namespace RecipeList.Web.Pages
             this.recipeService = recipeService;
         }
 
-        public async Task OnGetAsync(int id)
+        public async Task OnGetAsync(long id)
         {
             Recipe = await recipeService.GetRecipeAsync(id);
         }

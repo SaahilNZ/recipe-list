@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -10,54 +11,53 @@ namespace RecipeList.Services
 {
     public class RecipeApiService : IRecipeService
     {
-        public async Task<List<Recipe>> GetRecipesAsync()
+        private delegate Exception ErrorHandler<T>(ApiResponse<T> response);
+        private static readonly string BASE_URL = "http://recipelistapi.azurewebsites.net/api";
+
+        private async Task<T> GetAsync<T>(string endpoint,
+            Dictionary<ErrorCode, ErrorHandler<T>> errorHandlers)
         {
-            string apiUrl = "http://recipelistapi.azurewebsites.net/api/recipes";
+            string url = Path.Combine(BASE_URL, endpoint);
             using (var client = new HttpClient())
             {
-                using (var response = await client.GetAsync(apiUrl))
+                using (var response = await client.GetAsync(url))
                 {
                     using (var content = response.Content)
                     {
                         string json = await content.ReadAsStringAsync();
-                        var data = JsonConvert.DeserializeObject<ApiResponse<List<Recipe>>>(json);
-                        
-                        switch (data.Status)
+                        var data = JsonConvert.DeserializeObject<ApiResponse<T>>(json);
+
+                        if (data.Status == ErrorCode.Success)
                         {
-                            case ErrorCode.Success:
-                                return data.Response;
-                            default:
-                                throw new InvalidOperationException($"An unhandled error occured: '{data.ErrorMessage}' ({data.Status})");
+                            return data.Response;
+                        }
+                        else if (errorHandlers.TryGetValue(data.Status, out var handler))
+                        {
+                            throw handler(data);
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"An unhandled error occured: '{data.ErrorMessage}' ({data.Status})");
                         }
                     }
                 }
             }
         }
 
-        public async Task<RecipeDetails> GetRecipeAsync(int id)
+        public async Task<List<Recipe>> GetRecipesAsync()
         {
-            string apiUrl = $"http://recipelistapi.azurewebsites.net/api/recipes/{id}";
-            using (var client = new HttpClient())
+            var errorHandlers = new Dictionary<ErrorCode, ErrorHandler<List<Recipe>>>();
+            return await GetAsync<List<Recipe>>("recipes", errorHandlers);
+        }
+
+        public async Task<RecipeDetails> GetRecipeAsync(long id)
+        {
+            var errorHandlers = new Dictionary<ErrorCode, ErrorHandler<RecipeDetails>>
             {
-                using (var response = await client.GetAsync(apiUrl))
-                {
-                    using (var content = response.Content)
-                    {
-                        string json = await content.ReadAsStringAsync();
-                        var data = JsonConvert.DeserializeObject<ApiResponse<RecipeDetails>>(json);
-                        
-                        switch (data.Status)
-                        {
-                            case ErrorCode.Success:
-                                return data.Response;
-                            case ErrorCode.RecipeNotFound:
-                                throw new RecipeNotFoundException(data.GetErrorData<int>("id"));
-                            default:
-                                throw new InvalidOperationException($"An unhandled error occured: '{data.ErrorMessage}' ({data.Status})");
-                        }
-                    }
-                }
-            }
+                [ErrorCode.RecipeNotFound] = res =>
+                    new RecipeNotFoundException(res.GetErrorData<long>("id"))
+            };
+            return await GetAsync<RecipeDetails>($"recipes/{id}", errorHandlers);
         }
     }
 }

@@ -335,7 +335,7 @@ namespace RecipeList.Services
             return await Task<List<Recipe>>.FromResult(result);
         }
 
-        public async Task<RecipeDetails> GetRecipeAsync(int id)
+        public async Task<RecipeDetails> GetRecipeAsync(long id)
         {
             try
             {

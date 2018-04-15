@@ -8,6 +8,6 @@ namespace RecipeList.Services
     public interface IRecipeService
     {
         Task<List<Recipe>> GetRecipesAsync();
-        Task<RecipeDetails> GetRecipeAsync(int id);
+        Task<RecipeDetails> GetRecipeAsync(long id);
     }
 }

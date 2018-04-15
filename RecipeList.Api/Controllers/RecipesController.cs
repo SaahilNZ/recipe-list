@@ -28,7 +28,7 @@ namespace RecipeList.Api.Controllers
 
         // GET api/recipes/5
         [HttpGet("{id}")]
-        public async Task<ApiResponse<RecipeDetails>> Get(int id)
+        public async Task<ApiResponse<RecipeDetails>> Get(long id)
         {
             try
             {
