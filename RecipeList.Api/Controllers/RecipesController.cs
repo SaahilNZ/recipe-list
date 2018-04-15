@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RecipeList.Model;
 using RecipeList.Services;
+using RecipeList.Services.Exceptions;
 
 namespace RecipeList.Api.Controllers
 {
@@ -20,16 +21,28 @@ namespace RecipeList.Api.Controllers
 
         // GET api/recipes
         [HttpGet]
-        public IEnumerable<Recipe> Get()
+        public ApiResponse<List<Recipe>> Get()
         {
-            return recipeService.GetRecipes();
+            return ApiResponse<List<Recipe>>.FromData(recipeService.GetRecipes());
         }
 
         // GET api/recipes/5
         [HttpGet("{id}")]
-        public RecipeDetails Get(int id)
+        public ApiResponse<RecipeDetails> Get(int id)
         {
-            return recipeService.GetRecipe(id);
+            try
+            {
+                return ApiResponse<RecipeDetails>.FromData(recipeService.GetRecipe(id));
+            }
+            catch (RecipeNotFoundException e)
+            {
+                return ApiResponse<RecipeDetails>.FromErrorCode(e.Message,
+                    ErrorCode.RecipeNotFound, new Dictionary<string, object>
+                        {
+                            { "id", id }
+                        });
+            }
+
         }
     }
 }
