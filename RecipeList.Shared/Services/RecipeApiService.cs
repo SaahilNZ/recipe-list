@@ -12,12 +12,18 @@ namespace RecipeList.Services
     public class RecipeApiService : IRecipeService
     {
         private delegate Exception ErrorHandler<T>(ApiResponse<T> response);
-        private static readonly string BASE_URL = "http://recipelistapi.azurewebsites.net/api";
+
+        private readonly string baseUrl;
+        
+        public RecipeApiService(string baseUrl)
+        {
+            this.baseUrl = baseUrl;
+        }
 
         private async Task<T> GetAsync<T>(string endpoint,
             Dictionary<ErrorCode, ErrorHandler<T>> errorHandlers)
         {
-            string url = Path.Combine(BASE_URL, endpoint);
+            string url = Path.Combine(baseUrl, endpoint);
             using (var client = new HttpClient())
             {
                 using (var response = await client.GetAsync(url))

@@ -12,6 +12,8 @@ namespace RecipeList.Web
 {
     public class Startup
     {
+        private static readonly string API_URL_ENV = "RECIPE_LIST_API";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,7 +26,12 @@ namespace RecipeList.Web
         {
             services.AddMvc();
 
-            services.AddTransient<IRecipeService, RecipeApiService>();
+            string apiUrl = Environment.GetEnvironmentVariable(API_URL_ENV);
+            if (string.IsNullOrWhiteSpace(apiUrl))
+            {
+                throw new InvalidOperationException($"{API_URL_ENV} environment variable not configured.");
+            }
+            services.AddSingleton<IRecipeService>(new RecipeApiService(apiUrl));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
