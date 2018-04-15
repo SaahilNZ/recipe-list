@@ -21,18 +21,18 @@ namespace RecipeList.Api.Controllers
 
         // GET api/recipes
         [HttpGet]
-        public ApiResponse<List<Recipe>> Get()
+        public async Task<ApiResponse<List<Recipe>>> Get()
         {
-            return ApiResponse<List<Recipe>>.FromData(recipeService.GetRecipes());
+            return ApiResponse<List<Recipe>>.FromData(await recipeService.GetRecipesAsync());
         }
 
         // GET api/recipes/5
         [HttpGet("{id}")]
-        public ApiResponse<RecipeDetails> Get(int id)
+        public async Task<ApiResponse<RecipeDetails>> Get(int id)
         {
             try
             {
-                return ApiResponse<RecipeDetails>.FromData(recipeService.GetRecipe(id));
+                return ApiResponse<RecipeDetails>.FromData(await recipeService.GetRecipeAsync(id));
             }
             catch (RecipeNotFoundException e)
             {

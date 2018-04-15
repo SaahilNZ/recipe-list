@@ -24,7 +24,7 @@ namespace RecipeList.Web
         {
             services.AddMvc();
 
-            services.AddTransient<IRecipeService, RecipeService>();
+            services.AddTransient<IRecipeService, RecipeApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

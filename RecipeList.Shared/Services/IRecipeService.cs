@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RecipeList.Model;
 
 namespace RecipeList.Services
 {
     public interface IRecipeService
     {
-        List<Recipe> GetRecipes();
-        RecipeDetails GetRecipe(int id);
+        Task<List<Recipe>> GetRecipesAsync();
+        Task<RecipeDetails> GetRecipeAsync(int id);
     }
 }

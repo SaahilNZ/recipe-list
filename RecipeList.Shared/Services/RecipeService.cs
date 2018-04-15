@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using RecipeList.Model;
 using RecipeList.Services.Exceptions;
 
@@ -323,21 +324,23 @@ namespace RecipeList.Services
             };
         }
 
-        public List<Recipe> GetRecipes()
+        public async Task<List<Recipe>> GetRecipesAsync()
         {
-            return recipes.Select(r => new Recipe
+            var result = recipes.Select(r => new Recipe
                 {
                     Id = r.Id,
                     Name = r.Name,
                     CreatedBy = r.CreatedBy
                 }).ToList();
+            return await Task<List<Recipe>>.FromResult(result);
         }
 
-        public RecipeDetails GetRecipe(int id)
+        public async Task<RecipeDetails> GetRecipeAsync(int id)
         {
             try
             {
-                return recipes.First(r => r.Id == id);
+                var result = recipes.First(r => r.Id == id);
+                return await Task<RecipeDetails>.FromResult(result);
             }
             catch (InvalidOperationException)
             {
