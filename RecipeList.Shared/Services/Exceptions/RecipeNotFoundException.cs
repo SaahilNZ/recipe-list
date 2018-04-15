@@ -6,9 +6,9 @@ namespace RecipeList.Services.Exceptions
 {
     public class RecipeNotFoundException : Exception
     {
-        public int RecipeId { get; private set; }
+        public long RecipeId { get; private set; }
 
-        public RecipeNotFoundException(int recipeId)
+        public RecipeNotFoundException(long recipeId)
             : base($"A recipe with Id {recipeId} does not exist.")
         {
             RecipeId = recipeId;

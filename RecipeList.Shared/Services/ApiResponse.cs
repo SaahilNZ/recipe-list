@@ -39,5 +39,10 @@ namespace RecipeList.Services
                 ErrorData = errorData
             };
         }
+
+        public TData GetErrorData<TData>(string key)
+        {
+            return (TData)ErrorData[key];
+        }
     }
 }
