@@ -1,0 +1,25 @@
+﻿@page "{id:int}"
+@model RecipeDetailsModel
+@{
+    ViewData["Title"] = @Model.Recipe.Name;
+}
+<h2>@ViewData["Title"]</h2>
+<p>Created by <strong>@Model.Recipe.CreatedBy.FullName</strong></p>
+<p>Serves: <strong>@Model.Recipe.Serves</strong></p>
+
+<h3>Ingredients</h3>
+<ul>
+    @foreach (var ingredient in Model.Recipe.Ingredients)
+    {
+        <li>@Html.Raw(@ingredient.Name)</li>
+    }
+</ul>
+
+<h3>Method</h3>
+<ol>
+    @foreach (var step in Model.Recipe.Method)
+    {
+        <li>@Html.Raw(@step)</li>
+    }
+</ol>
+
