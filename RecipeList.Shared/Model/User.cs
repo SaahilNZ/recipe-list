@@ -5,8 +5,8 @@ namespace RecipeList.Model
 {
     public class User
     {
-        public string FirstName;
-        public string LastName;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public string FullName
         {
