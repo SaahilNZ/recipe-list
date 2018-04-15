@@ -5,6 +5,6 @@ namespace RecipeList.Model
 {
     public class Ingredient
     {
-        public string Name;        
+        public string Name { get; set; }   
     }
 }

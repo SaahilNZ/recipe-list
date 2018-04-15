@@ -5,8 +5,8 @@ namespace RecipeList.Model
 {
     public class Recipe
     {
-        public int Id;
-        public string Name;
-        public User CreatedBy;
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public User CreatedBy { get; set; }
     }
 }
