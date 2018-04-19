@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RecipeList.Shared\RecipeList.Shared.csproj" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeList.DataAccess\RecipeList.DataAccess.csproj" />
+    <ProjectReference Include="..\RecipeList.Services\RecipeList.Services.csproj" />
   </ItemGroup>
 
 </Project>

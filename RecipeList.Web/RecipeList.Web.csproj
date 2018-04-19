@@ -9,6 +9,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RecipeList.Shared\RecipeList.Shared.csproj" />
+    <ProjectReference Include="..\RecipeList.DataAccess\RecipeList.DataAccess.csproj" />
+    <ProjectReference Include="..\RecipeList.Services\RecipeList.Services.csproj" />
   </ItemGroup>
 </Project>
