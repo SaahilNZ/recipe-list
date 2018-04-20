@@ -14,6 +14,7 @@ namespace RecipeList.Web.Pages
         private readonly IRecipeService recipeService;
 
         public RecipeDetails Recipe { get; set; }
+        public List<Step> RecipeSteps { get; set; }
 
         public RecipeDetailsModel(IRecipeService recipeService)
         {
@@ -23,6 +24,7 @@ namespace RecipeList.Web.Pages
         public async Task OnGetAsync(long id)
         {
             Recipe = await recipeService.GetRecipeAsync(id);
+            RecipeSteps = Recipe.Method.OrderBy(r => r.StepNumber).ToList();
         }
     }
 }

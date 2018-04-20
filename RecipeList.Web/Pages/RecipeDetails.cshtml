@@ -4,7 +4,7 @@
     ViewData["Title"] = @Model.Recipe.Name;
 }
 <h2>@ViewData["Title"]</h2>
-<p>Created by <strong>@Model.Recipe.CreatedBy.FullName</strong></p>
+<p>Created by <strong>@Model.Recipe.User.FullName</strong></p>
 <p>Serves: <strong>@Model.Recipe.Serves</strong></p>
 
 <h3>Ingredients</h3>
@@ -17,9 +17,9 @@
 
 <h3>Method</h3>
 <ol>
-    @foreach (var step in Model.Recipe.Method)
+    @foreach (var step in Model.RecipeSteps)
     {
-        <li>@Html.Raw(@step)</li>
+        <li>@Html.Raw(@step.Description)</li>
     }
 </ol>
 
