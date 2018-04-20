@@ -38,14 +38,22 @@ namespace RecipeList.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            bool populateSeedData = false;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                populateSeedData = !File.Exists(DB_PATH);
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(DB_PATH));
             var context = app.ApplicationServices.GetService<RecipesContext>();
             context.Database.Migrate();
+
+            if (populateSeedData)
+            {
+                // DataSeeder.PopulateSeedData(this RecipesContext)
+                context.PopulateSeedData();
+            }
 
             app.UseMvc();
         }
