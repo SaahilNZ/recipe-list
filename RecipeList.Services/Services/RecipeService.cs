@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RecipeList.DataAccess;
 using RecipeList.Model;
 using RecipeList.Services.Exceptions;
@@ -10,7 +11,6 @@ namespace RecipeList.Services
 {
     public class RecipeService : IRecipeService
     {
-        private List<RecipeDetails> recipes;
         private readonly RecipesContext context;
 
         public RecipeService(RecipesContext context)
@@ -20,11 +20,13 @@ namespace RecipeList.Services
 
         public async Task<List<Recipe>> GetRecipesAsync()
         {
+            var recipes = context.Recipes.Include(r => r.User).ToList();
             var result = recipes.Select(r => new Recipe
             {
                 RecipeId = r.RecipeId,
                 Name = r.Name,
-                UserId = r.UserId
+                UserId = r.UserId,
+                User = r.User
             }).ToList();
             return await Task<List<Recipe>>.FromResult(result);
         }
@@ -33,6 +35,10 @@ namespace RecipeList.Services
         {
             try
             {
+                var recipes = context.Recipes
+                    .Include(r => r.Method)
+                    .Include(r => r.Ingredients)
+                    .Include(r => r.User).ToList();
                 var result = recipes.First(r => r.RecipeId == id);
                 return await Task<RecipeDetails>.FromResult(result);
             }

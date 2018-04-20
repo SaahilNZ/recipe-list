@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace RecipeList.Model
 {
@@ -11,6 +12,8 @@ namespace RecipeList.Model
         [Required]
         public string Name { get; set; }
         
+        [JsonIgnore]
         public long UserId { get; set; }
+        public User User { get; set; }
     }
 }

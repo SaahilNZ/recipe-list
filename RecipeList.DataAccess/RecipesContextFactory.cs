@@ -7,16 +7,11 @@ namespace RecipeList.DataAccess
 {
     public class RecipesContextFactory : IDesignTimeDbContextFactory<RecipesContext>
     {
-        private static readonly string DB_PATH_ENV = "RECIPE_LIST_DB";
+        private static readonly string DB_PATH = "data/recipes.db";
 
         public RecipesContext CreateDbContext(string[] args)
         {
-            var dbPath = Environment.GetEnvironmentVariable(DB_PATH_ENV);
-            if (string.IsNullOrWhiteSpace(dbPath))
-            {
-                throw new InvalidOperationException($"{DB_PATH_ENV} environment variable not configured.");
-            }
-            return new RecipesContext(dbPath);
+            return new RecipesContext(DB_PATH);
         }
     }
 }
