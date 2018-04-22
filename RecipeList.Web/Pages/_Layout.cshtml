@@ -8,24 +8,19 @@
     <link rel="stylesheet" href="~/css/vendor.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">Recipe Book</a>
+    <div class="bg-dark sticky-top">
+        <nav class="navbar navbar-dark navbar-expand-lg container">
+            <a asp-page="/Index" class="navbar-brand">Recipe Book</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" asp-page="/Index">Home</a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/Index">Home</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
