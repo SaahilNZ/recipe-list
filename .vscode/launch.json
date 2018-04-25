@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "RecipeList.Api",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/RecipeList.Api/bin/Debug/netcoreapp2.0/RecipeList.Api.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/RecipeList.Api",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "RecipeList.Web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/RecipeList.Web/bin/Debug/netcoreapp2.0/RecipeList.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/RecipeList.Web",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "API/Web",
+            "configurations": ["RecipeList.Web", "RecipeList.Api"]
+        }
+    ]
+}
