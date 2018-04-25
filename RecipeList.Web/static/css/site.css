@@ -1,3 +1,10 @@
 h2 {
     padding: 15px 0px;
 }
+
+div.vertical-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

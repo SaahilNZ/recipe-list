@@ -47,5 +47,16 @@ namespace RecipeList.Services
                 throw new RecipeNotFoundException(id);
             }
         }
+
+        public async Task<RecipeDetails> PostRecipeAsync(RecipeDetails recipe)
+        {
+            context.Users.Add(recipe.User);
+            context.Ingredients.AddRange(recipe.Ingredients);
+            context.RecipeSteps.AddRange(recipe.Method);
+            context.Recipes.Add(recipe);
+            await context.SaveChangesAsync();
+            
+            return recipe;
+        }
     }
 }

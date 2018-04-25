@@ -13,8 +13,10 @@ namespace RecipeList.Model
         [Required]
         public string Name { get; set; }
         
+        [Range(1, int.MaxValue)]
         [Required]
         public int Serves { get; set; }
+        
         public List<Ingredient> Ingredients { get; set; }
         public List<Step> Method { get; set; }
         

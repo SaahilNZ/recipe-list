@@ -9,5 +9,6 @@ namespace RecipeList.Services
     {
         Task<List<Recipe>> GetRecipesAsync();
         Task<RecipeDetails> GetRecipeAsync(long id);
+        Task<RecipeDetails> PostRecipeAsync(RecipeDetails recipe);
     }
 }

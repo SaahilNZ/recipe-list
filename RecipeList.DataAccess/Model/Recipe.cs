@@ -14,6 +14,8 @@ namespace RecipeList.Model
         
         [JsonIgnore]
         public long UserId { get; set; }
+
+        [Display(Name = "Created by")]
         public User User { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace RecipeList.Api.Controllers
         }
 
         // GET api/recipes/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetRecipe")]
         public async Task<ApiResponse<RecipeDetails>> Get(long id)
         {
             try
@@ -42,7 +42,19 @@ namespace RecipeList.Api.Controllers
                             { "id", id }
                         });
             }
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] RecipeDetails recipe)
+        {
+            if (recipe == null)
+            {
+                return BadRequest();
+            }
+
+            await recipeService.PostRecipeAsync(recipe);
+
+            return CreatedAtRoute("GetRecipe", new { id = recipe.RecipeId }, recipe);
         }
     }
 }

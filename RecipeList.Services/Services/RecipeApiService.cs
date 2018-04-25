@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RecipeList.Model;
 using RecipeList.Services.Exceptions;
@@ -23,7 +25,7 @@ namespace RecipeList.Services
         private async Task<T> GetAsync<T>(string endpoint,
             Dictionary<ErrorCode, ErrorHandler<T>> errorHandlers)
         {
-            string url = Path.Combine(baseUrl, endpoint);
+            var url = new Uri(new Uri(baseUrl), endpoint);
             using (var client = new HttpClient())
             {
                 using (var response = await client.GetAsync(url))
@@ -50,6 +52,18 @@ namespace RecipeList.Services
             }
         }
 
+        private async Task PostAsync<T>(string endpoint, T postData,
+            Dictionary<ErrorCode, ErrorHandler<T>> errorHandlers)
+        {
+            var url = new Uri(new Uri(baseUrl), endpoint);
+            using (var client = new HttpClient())
+            {
+                var encodedData = new StringContent(JsonConvert.SerializeObject(postData),
+                    Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(url, encodedData);
+            }
+        }
+
         public async Task<List<Recipe>> GetRecipesAsync()
         {
             var errorHandlers = new Dictionary<ErrorCode, ErrorHandler<List<Recipe>>>();
@@ -64,6 +78,13 @@ namespace RecipeList.Services
                     new RecipeNotFoundException(res.GetErrorData<long>("id"))
             };
             return await GetAsync<RecipeDetails>($"recipes/{id}", errorHandlers);
+        }
+
+        public async Task<RecipeDetails> PostRecipeAsync(RecipeDetails recipe)
+        {
+            var errorHandlers = new Dictionary<ErrorCode, ErrorHandler<RecipeDetails>>();
+            await PostAsync("recipes", recipe, errorHandlers);
+            return recipe;
         }
     }
 }
