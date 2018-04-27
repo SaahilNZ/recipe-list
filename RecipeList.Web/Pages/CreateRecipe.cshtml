@@ -5,6 +5,12 @@
 }
 <h2>@ViewData["Title"]</h2>
 
+@if (Model.DisplayErrorMessage)
+{
+    <div class="alert alert-danger" role="alert">
+        @Html.Raw(@Model.ErrorMessage)
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
         <form method="post">

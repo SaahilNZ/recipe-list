@@ -6,7 +6,8 @@ namespace RecipeList.Services
     public enum ErrorCode
     {
         Success = 0,
-        RecipeNotFound = 1
+        NotFound = 1,
+        InvalidRequest = 2
     }
 
     public class ApiResponse<T>

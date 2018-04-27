@@ -22,12 +22,12 @@ namespace RecipeList.Services
         {
             var recipes = context.Recipes.Include(r => r.User).ToList();
             var result = recipes.Select(r => new Recipe
-            {
-                RecipeId = r.RecipeId,
-                Name = r.Name,
-                UserId = r.UserId,
-                User = r.User
-            }).ToList();
+                {
+                    RecipeId = r.RecipeId,
+                    Name = r.Name,
+                    UserId = r.UserId,
+                    User = r.User
+                }).ToList();
             return await Task<List<Recipe>>.FromResult(result);
         }
 
@@ -48,8 +48,10 @@ namespace RecipeList.Services
             }
         }
 
-        public async Task<RecipeDetails> PostRecipeAsync(RecipeDetails recipe)
+        public async Task<RecipeDetails> CreateRecipeAsync(RecipeDetails recipe)
         {
+            recipe.Validate();
+
             context.Users.Add(recipe.User);
             context.Ingredients.AddRange(recipe.Ingredients);
             context.RecipeSteps.AddRange(recipe.Method);

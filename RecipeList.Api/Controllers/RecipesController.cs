@@ -28,33 +28,44 @@ namespace RecipeList.Api.Controllers
 
         // GET api/recipes/5
         [HttpGet("{id}", Name = "GetRecipe")]
-        public async Task<ApiResponse<RecipeDetails>> Get(long id)
+        public async Task<IActionResult> Get(long id)
         {
             try
             {
-                return ApiResponse<RecipeDetails>.FromData(await recipeService.GetRecipeAsync(id));
+                var response = ApiResponse<RecipeDetails>.FromData(
+                    await recipeService.GetRecipeAsync(id));
+                return Ok(response);
             }
             catch (RecipeNotFoundException e)
             {
-                return ApiResponse<RecipeDetails>.FromErrorCode(e.Message,
-                    ErrorCode.RecipeNotFound, new Dictionary<string, object>
+                var response = ApiResponse<RecipeDetails>.FromErrorCode(e.Message,
+                    ErrorCode.NotFound, new Dictionary<string, object>
                         {
                             { "id", id }
                         });
+                return NotFound(response);
             }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RecipeDetails recipe)
         {
-            if (recipe == null)
+            ApiResponse<RecipeDetails> response;
+            try
             {
-                return BadRequest();
+                await recipeService.CreateRecipeAsync(recipe);
+                response = ApiResponse<RecipeDetails>.FromData(recipe);
             }
-
-            await recipeService.PostRecipeAsync(recipe);
-
-            return CreatedAtRoute("GetRecipe", new { id = recipe.RecipeId }, recipe);
+            catch (InvalidRecipeException e)
+            {
+                response = ApiResponse<RecipeDetails>.FromErrorCode(e.Message,
+                    ErrorCode.InvalidRequest, new Dictionary<string, object>
+                    {
+                        { "reasons", e.Reasons }
+                    });
+                return BadRequest(response);
+            }
+            return CreatedAtRoute("GetRecipe", new { id = recipe.RecipeId }, response);
         }
     }
 }
