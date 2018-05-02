@@ -8,3 +8,14 @@ div.vertical-center {
     justify-content: center;
     height: 100%;
 }
+
+.list-icon {
+    line-height: 1.5em;
+    color: #6c757d;
+    transition-duration: 0.25s;
+    cursor: pointer;
+}
+
+.list-icon:hover {
+    color: black;
+}

@@ -19,9 +19,13 @@
   {
     "outputFileName": "wwwroot/css/vendor.min.css",
     "inputFiles": [
-      "node_modules/bootstrap/dist/css/bootstrap.min.css"
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css",
+      "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-regular.css",
+      "node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css",
+      "node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css"
     ],
-    "minify": { "enabled": false }
+    "minify": { "enabled": true, "adjustRelativePaths": false }
   },
   {
     "outputFileName": "wwwroot/js/vendor.min.js",

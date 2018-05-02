@@ -48,22 +48,17 @@ namespace RecipeList.Web.Pages
                 FirstName = "Jenny",
                 LastName = "Doe"
             };
-            List<Ingredient> ingredients = new List<Ingredient>
+            List<Ingredient> ingredients = new List<Ingredient>();
+            var ingredientStrings = Request.Form["ingredients"].ToList();
+            ingredients.AddRange(ingredientStrings.Select(s => new Ingredient { Name = s }));
+
+            List<Step> method = new List<Step>();
+            var methodStrings = Request.Form["method"].ToList();
+            for (int i = 0; i < methodStrings.Count; i++)
             {
-                new Ingredient { Name = "Ingredient 1" },
-                new Ingredient { Name = "Ingredient 2" },
-                new Ingredient { Name = "Ingredient 3" },
-                new Ingredient { Name = "Ingredient 4" },
-                new Ingredient { Name = "Ingredient 5" }
-            };
-            List<Step> method = new List<Step>
-            {
-                new Step { StepNumber = 1, Description = "Step 1" },
-                new Step { StepNumber = 2, Description = "Step 2" },
-                new Step { StepNumber = 3, Description = "Step 3" },
-                new Step { StepNumber = 4, Description = "Step 4" },
-                new Step { StepNumber = 5, Description = "Step 5" }
-            };
+                method.Add(new Step { StepNumber = i + 1, Description = methodStrings[i] });
+            }
+
             var recipe = new RecipeDetails
             {
                 Name = Recipe.Name,
