@@ -19,3 +19,34 @@ div.vertical-center {
 .list-icon:hover {
     color: black;
 }
+
+.handle {
+    line-height: 1.5em;
+    color: #6c757d;
+    margin-right: 1em;
+}
+
+.handle,
+.list-icon {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.handle-container {
+    padding-right: 0;
+}
+
+.delete-container,
+.handle-container {
+    display: flex;
+}
+
+.text-container {
+    width: calc(100% - 90px);
+    padding: 0;
+}
+
+.list-text {
+    word-wrap: break-word;
+}
